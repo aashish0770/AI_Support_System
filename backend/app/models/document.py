@@ -25,11 +25,11 @@ class Document(Base):
     )
     title: Mapped[str] = mapped_column(String(500), nullable=False)
     source_type: Mapped[DocumentSourceType] = mapped_column(
-        SAEnum(DocumentSourceType, nmae="document_source_type"), nullable=False
+        SAEnum(DocumentSourceType, name="document_source_type"), nullable=False
     )
-    # sha256 hex digest, this is what ingest.py checks before reprocessing.
+    # sha256 hex digest — this is what ingest.py checks before reprocessing.
     content_hash: Mapped[str] = mapped_column(
-        String(64), unique=True, nullable=False, index=True
+        String(64), unique=True, index=True, nullable=False
     )
     status: Mapped[DocumentStatus] = mapped_column(
         SAEnum(DocumentStatus, name="document_status"),
@@ -42,7 +42,7 @@ class Document(Base):
 
     uploaded_by: Mapped[Optional["User"]] = relationship(back_populates="documents")
     chunks: Mapped[List["Chunk"]] = relationship(
-        back_populates="documents",
-        cacade="all, delete-orphan",
+        back_populates="document",
+        cascade="all, delete-orphan",
         order_by="Chunk.chunk_index",
     )

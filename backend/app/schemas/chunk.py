@@ -1,4 +1,3 @@
-# backend/app/schemas/chunk.py
 from __future__ import annotations
 
 from pydantic import BaseModel, ConfigDict
@@ -8,13 +7,13 @@ class ChunkBase(BaseModel):
     document_id: int
     chunk_index: int
     content: str
-    metadata: dict | None = None
+    metadata_json: dict | None = None
 
 
 class ChunkCreate(ChunkBase):
     embedding_id: str | None = None
-    # tsv is deliberately not settable via the API:
-    # It's derived from `content` server-side
+    # tsv is deliberately not settable via the API — it's derived from
+    # `content` server-side (see the model's comment on the tsv column).
 
 
 class ChunkRead(ChunkBase):
@@ -22,4 +21,4 @@ class ChunkRead(ChunkBase):
 
     id: int
     embedding_id: str | None = None
-    # tsv excluded, internal search artifact, not something a client needs.
+    # tsv excluded — internal search artifact, not something a client needs.

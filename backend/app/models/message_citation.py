@@ -21,7 +21,7 @@ class MessageCitation(Base):
 
     __tablename__ = "message_citations"
 
-    id: Mapped[int] = mapped_column(primry_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     message_id: Mapped[int] = mapped_column(
         ForeignKey("messages.id", ondelete="CASCADE"), nullable=False
     )

@@ -11,4 +11,4 @@ class MessageCitationRead(BaseModel):
     id: int
     message_id: int
     chunk_id: int
-    relevence_score: float
+    relevance_score: float

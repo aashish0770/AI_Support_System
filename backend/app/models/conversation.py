@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, List
+from typing import List, TYPE_CHECKING
 
 from sqlalchemy import DateTime, ForeignKey, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -17,11 +17,18 @@ if TYPE_CHECKING:
 
 class Conversation(Base):
     __tablename__ = "conversations"
-    
+
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.is", ondelete="CASCADE"), nullable=False)
-    created_at: Mapped[datetime]= mapped_column(DateTime(timezone=True), server_default=func.now())
-    
-    # relationships
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
     user: Mapped["User"] = relationship(back_populates="conversations")
-    messages: Mapped[List["Message"]]= relationship(back_populates="conversation", cascade="all, delete-orphan", order_by="Message.created_at")
+    messages: Mapped[List["Message"]] = relationship(
+        back_populates="conversation",
+        cascade="all, delete-orphan",
+        order_by="Message.created_at",
+    )

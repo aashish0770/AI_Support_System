@@ -28,7 +28,7 @@ class MessageCitation(Base):
     chunk_id: Mapped[int] = mapped_column(
         ForeignKey("chunks.id", ondelete="CASCADE"), nullable=False
     )
-    relevence_score: Mapped[float] = mapped_column(Float, nullable=False)
+    relevance_score: Mapped[float] = mapped_column(Float, nullable=False)
 
     # Relationships
     message: Mapped["Message"] = relationship(back_populates="citations")

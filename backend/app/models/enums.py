@@ -4,13 +4,13 @@ import enum
 
 class UserRole(str, enum.Enum):
     admin = "admin"
-    user = "user"
+    agent = "agent"
     customer = "customer"
 
 
 class DocumentSourceType(str, enum.Enum):
     markdown = "markdown"
-    tickets = "tickets"
+    ticket = "ticket"
     pdf = "pdf"
 
 

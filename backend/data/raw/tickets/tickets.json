@@ -1,0 +1,146 @@
+[
+  {
+    "subject": "Webhook signature verification always fails",
+    "description": "I'm computing HMAC-SHA256 of the JSON body using our signing secret but it never matches the Cobalt-Signature header. I'm parsing the JSON, re-serializing it, and hashing that.",
+    "status": "resolved",
+    "priority": "high",
+    "created_at": "2026-02-03T14:12:00Z",
+    "resolution_notes": "Customer was hashing the re-serialized JSON instead of the raw request body, which changes key ordering. Told them to hash the raw bytes before any parsing. Confirmed working after the fix."
+  },
+  {
+    "subject": "Getting 429 errors on our Pro plan integration",
+    "description": "We're seeing 429 Too Many Requests during peak hours. We're on the Pro plan. What's the actual limit and how do we avoid this?",
+    "status": "resolved",
+    "priority": "medium",
+    "created_at": "2026-02-05T09:41:00Z",
+    "resolution_notes": "Pro plan is 120 requests/minute. Advised switching their polling-based Google Sheets trigger to a webhook-based trigger where possible, since polling counts against the per-minute limit on every check."
+  },
+  {
+    "subject": "Slack action failing with channel_not_found",
+    "description": "Our Send Message action to #signups keeps failing. The channel definitely exists.",
+    "status": "resolved",
+    "priority": "medium",
+    "created_at": "2026-02-07T11:05:00Z",
+    "resolution_notes": "The Cobalt Loop bot user was never invited to the #signups channel. Had them run /invite @Cobalt Loop in Slack. Resolved."
+  },
+  {
+    "subject": "API key stopped working right after rotation",
+    "description": "Rotated our key 30 seconds ago and now getting 401 AUTH_KEY_REVOKED on the new key, not the old one.",
+    "status": "resolved",
+    "priority": "high",
+    "created_at": "2026-02-10T16:30:00Z",
+    "resolution_notes": "Customer had a typo copying the new key (trailing space). Not a propagation delay issue as initially suspected. Re-copied key, resolved."
+  },
+  {
+    "subject": "Locked out of account after enabling SSO enforcement",
+    "description": "We enabled 'Require SSO for all members' this morning and now half our team can't log in at all.",
+    "status": "resolved",
+    "priority": "urgent",
+    "created_at": "2026-02-12T08:15:00Z",
+    "resolution_notes": "The locked-out members were never assigned to the Cobalt Loop app in the customer's Okta instance. Walked them through assigning all team members in Okta first, then re-verified login. Recommended they always verify IdP assignment before enforcing SSO going forward."
+  },
+  {
+    "subject": "Workflow shows Active but hasn't fired in 3 days despite new rows",
+    "description": "New rows are definitely being added to the sheet but the workflow run history is empty.",
+    "status": "open",
+    "priority": "high",
+    "created_at": "2026-02-14T10:00:00Z",
+    "resolution_notes": null
+  },
+  {
+    "subject": "Duplicate Slack messages for the same signup event",
+    "description": "Every new signup sends two identical Slack messages instead of one.",
+    "status": "resolved",
+    "priority": "medium",
+    "created_at": "2026-02-15T13:22:00Z",
+    "resolution_notes": "Found two active workflows with an identical trigger configuration — a teammate had duplicated the workflow while testing and forgot to deactivate the copy. Paused the duplicate. Suggested enabling Duplicate Detection under workflow settings."
+  },
+  {
+    "subject": "Can we get retroactive processing for rows added before the workflow was turned on?",
+    "description": "We had 200 existing rows in the sheet before activating the workflow and none of them triggered anything. Can this be backfilled?",
+    "status": "closed",
+    "priority": "low",
+    "created_at": "2026-02-16T09:00:00Z",
+    "resolution_notes": "Explained this is expected behavior — triggers only fire for data created after activation, historical data isn't retroactively processed. No backfill feature currently exists. Customer acknowledged and closed the ticket."
+  },
+  {
+    "subject": "GitHub PR merged trigger fired for a PR that was only closed",
+    "description": "We closed PR #482 without merging, but our workflow ran as if it had been merged.",
+    "status": "open",
+    "priority": "medium",
+    "created_at": "2026-02-18T15:40:00Z",
+    "resolution_notes": null
+  },
+  {
+    "subject": "Question about downgrade timing",
+    "description": "If we downgrade from Business to Pro today, do we lose access immediately or at the end of the billing period?",
+    "status": "resolved",
+    "priority": "low",
+    "created_at": "2026-02-19T12:00:00Z",
+    "resolution_notes": "Confirmed downgrades take effect at the start of the next billing period, current plan limits remain active until then. Customer proceeded with the downgrade."
+  },
+  {
+    "subject": "Field mapping shows blank output but no error anywhere",
+    "description": "Our Slack message action sends but the message body is completely empty. No errors in run history.",
+    "status": "resolved",
+    "priority": "medium",
+    "created_at": "2026-02-20T10:18:00Z",
+    "resolution_notes": "Customer had a typo in the field reference ({{trigger.emial}} instead of {{trigger.email}}). Unresolved field references silently resolve to empty string rather than erroring, which is why nothing showed as failed. Corrected the typo."
+  },
+  {
+    "subject": "SAML assertion signature invalid during test login",
+    "description": "Testing our new Okta SSO connection and getting 'assertion signature invalid' every time.",
+    "status": "resolved",
+    "priority": "high",
+    "created_at": "2026-02-21T14:05:00Z",
+    "resolution_notes": "Customer had uploaded an older cached copy of the IdP metadata XML. Had them re-download current metadata directly from Okta and re-upload. Test login succeeded after."
+  },
+  {
+    "subject": "GitHub trigger not showing repository we granted access to",
+    "description": "We approved access to 3 repos in the GitHub App install but only 2 show up as available triggers in Cobalt Loop.",
+    "status": "resolved",
+    "priority": "low",
+    "created_at": "2026-02-22T09:30:00Z",
+    "resolution_notes": "Repository access at the GitHub App level doesn't auto-sync to Cobalt Loop's workflow list until manually refreshed. Had them click Refresh Repository List under Connected Apps. Third repo appeared."
+  },
+  {
+    "subject": "Webhook marked Failed after exactly 4 retries, is that expected?",
+    "description": "Our endpoint was down for about 2 hours during a deploy and one webhook delivery shows Failed. Is there a way to get it retried again?",
+    "status": "resolved",
+    "priority": "medium",
+    "created_at": "2026-02-23T17:12:00Z",
+    "resolution_notes": "Confirmed 4 retries over roughly 1.5 hours is expected before marking Failed. Customer can manually replay failed deliveries from Run History within 7 days — walked them through doing that for the affected delivery."
+  },
+  {
+    "subject": "Monthly task limit exceeded — will our workflows stop running?",
+    "description": "We just got the 100% usage warning email. Are our workflows going to stop working?",
+    "status": "resolved",
+    "priority": "high",
+    "created_at": "2026-02-24T08:45:00Z",
+    "resolution_notes": "Clarified that exceeding the monthly limit does not pause workflows automatically on their Business plan (no overage billing configured). Recommended upgrading before next cycle if usage trend continues, since a future overage billing policy change was mentioned as a possibility to watch for in their contract renewal."
+  },
+  {
+    "subject": "Need SCIM and manual member management to coexist temporarily",
+    "description": "We're migrating to SCIM but want to keep a couple of manually-added contractor accounts that aren't in our IdP group yet.",
+    "status": "open",
+    "priority": "medium",
+    "created_at": "2026-02-25T11:00:00Z",
+    "resolution_notes": null
+  },
+  {
+    "subject": "Export of run history for compliance before account deletion",
+    "description": "We're closing this account for compliance reasons but need last month's run history exported first.",
+    "status": "resolved",
+    "priority": "medium",
+    "created_at": "2026-02-26T13:50:00Z",
+    "resolution_notes": "Provided the export endpoint (GET /workflows/{id}/runs?format=export) and confirmed exports don't count against rate limits. Customer exported successfully before proceeding with account deletion."
+  },
+  {
+    "subject": "Full webhook payload missing from run history detail view",
+    "description": "We only see a truncated version of the action response in run history, not the full payload we need for debugging.",
+    "status": "resolved",
+    "priority": "low",
+    "created_at": "2026-02-27T10:20:00Z",
+    "resolution_notes": "Explained that only a 10KB preview is retained by default, and Full Payload Logging is opt-in due to PII retention concerns. Customer enabled it under Workflow settings after confirming their data doesn't include sensitive customer PII."
+  }
+]

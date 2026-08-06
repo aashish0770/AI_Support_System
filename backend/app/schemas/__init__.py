@@ -1,3 +1,4 @@
+# backend/app/schemas/__init__.py
 from .chunk import ChunkBase, ChunkCreate, ChunkRead
 from .conversation import ConversationRead
 from .document import DocumentBase, DocumentCreate, DocumentRead

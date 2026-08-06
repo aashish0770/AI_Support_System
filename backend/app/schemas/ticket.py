@@ -1,4 +1,4 @@
-# backend/app/schemas/user.py
+# backend/app/schemas/ticket.py
 from __future__ import annotations
 
 from datetime import datetime

@@ -20,4 +20,4 @@ LOADER_REGISTRY = {
     DocumentSourceType.ticket: TicketLoader,
 }
 
-__all__ = ["MarkdownLoader", "PDFLoader", "TicketLoader", "LOADER_REGISTRY"]
+__all__ = ["LOADER_REGISTRY", "MarkdownLoader", "PDFLoader", "TicketLoader"]

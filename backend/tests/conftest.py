@@ -26,7 +26,7 @@ from app.models import (
 
 TEST_DATABASE_URL = os.getenv(
     "TEST_DATABASE_URL",
-    "postgresql+psycopg2://postgres:postgres@localhost:5432/ai_support_system_test",
+    "postgresql+psycopg2://postgres:dark@localhost:5432/ai_support_system_test",
 )
 
 

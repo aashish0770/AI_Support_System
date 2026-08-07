@@ -23,9 +23,12 @@ class MarkdownLoader(BaseLoader):
 
     def extract_title(self, text: str, fallback: str) -> str:
         for line in text.splitlines():
+            line = line.strip()
             if line.startswith("#"):
-                return line.lstrip("#").strip()
-        return super().extract_title(text, fallback)
+                heading = line.lstrip("#").strip()
+                if heading:
+                    return heading[:200]
+        return fallback[:200]
 
     def ingest(self, db: Session, uploaded_by_user_id: int | None = None) -> int:
         """Ingest every .md file under DOCS_PATH. Returns the count of
@@ -38,7 +41,7 @@ class MarkdownLoader(BaseLoader):
 
             existing = (
                 db.query(self._document_model())
-                .filter_by(content_hash=content_hash)
+                .filter_by(content_hash=content_hash, source_type=self.source_type)
                 .first()
             )
             if existing:

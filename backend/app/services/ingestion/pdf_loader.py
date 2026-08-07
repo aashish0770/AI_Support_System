@@ -28,13 +28,12 @@ class PDFLoader(BaseLoader):
     source_type = DocumentSourceType.pdf
 
     def extract_text(self, file_path: Path) -> str:
-        reader = PdfReader(str(file_path))
-        text = []
-
-        for page in reader.pages:
-            content = page.extract_text()
-            if content:
-                text.append(content)
+        with PdfReader(str(file_path)) as reader:
+            text = []
+            for page in reader.pages:
+                content = page.extract_text()
+                if content:
+                    text.append(content)
 
         return "\n".join(text)
 

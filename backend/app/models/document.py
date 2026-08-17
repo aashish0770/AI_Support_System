@@ -4,7 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional, TYPE_CHECKING
 
-from sqlalchemy import DateTime, Enum as SAEnum, ForeignKey, String, func
+from sqlalchemy import DateTime, Enum as SAEnum, ForeignKey, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -39,6 +39,7 @@ class Document(Base):
     ingested_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+    content: Mapped[str] = mapped_column(Text, nullable=False)
 
     uploaded_by: Mapped[Optional["User"]] = relationship(back_populates="documents")
     chunks: Mapped[List["Chunk"]] = relationship(

@@ -47,6 +47,7 @@ class BaseLoader:
             title=title,
             source_type=self.source_type,
             content_hash=content_hash,
+            content=content,
             status=DocumentStatus.pending,
             uploaded_by_user_id=uploaded_by_user_id,
         )

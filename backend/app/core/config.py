@@ -8,6 +8,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from sqlalchemy import URL
+
 # Anchored to this files locaton, not th caller's CWD same reasoning as alembic/env.py
 # and the ingestion loaders path resolution.
 
@@ -26,10 +28,19 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(case_sensitive=False, extra="ignore")
 
     @property
-    def database_url(self):
-        return (
-            f"postgresql+psycopg2://{self.postgres_user}:{self.postgres_password}"
-            f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+    # def database_url(self):
+    #     return (
+    #         f"postgresql+psycopg2://{self.postgres_user}:{self.postgres_password}"
+    #         f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+    #     )
+    def database_url(self) -> URL:
+        return URL.create(
+            "postgresql+psycopg2",
+            username=self.postgres_user,
+            password=self.postgres_password,
+            host=self.postgres_host,
+            port=self.postgres_port,
+            database=self.postgres_db,
         )
 
 

@@ -67,10 +67,10 @@ def _promote_fully_embedded_documents(db: Session) -> int:
 
 def embed_pending_chunks() -> int:
     db = get_session()
-    collection = get_collection()
     embedded_total = 0
 
     try:
+        collection = get_collection()
         pending_chunks = (
             db.execute(
                 select(Chunk).where(Chunk.embedding_id.is_(None)).order_by(Chunk.id)

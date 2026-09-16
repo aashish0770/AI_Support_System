@@ -1,3 +1,5 @@
+# backend/app/services/vectorstore/chroma_client.py
+
 from __future__ import annotations
 
 from pathlib import Path

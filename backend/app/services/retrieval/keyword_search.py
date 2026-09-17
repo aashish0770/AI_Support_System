@@ -29,6 +29,9 @@ def keyword_search(
     ts_query = func.plainto_tsquery("english", query)
     rank = func.ts_rank(Chunk.tsv, ts_query, 1).label("rank")
 
+    if not 1 <= top_k <= 50:
+        raise ValueError("top_k must be between 1 and 50")
+
     stmt = (
         select(Chunk.id, Chunk.content, rank)
         .where(Chunk.tsv.op("@@")(ts_query))

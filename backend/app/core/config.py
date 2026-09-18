@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     postgres_port: int = 5432
     postgres_db: str = "ai_support_system"
 
+    # LLM provider
+    ollama_base_url: str = "http://localhost:11434"
+    ollama_model: str = "llama3.1:8b"
+
     model_config = SettingsConfigDict(case_sensitive=False, extra="ignore")
 
     @property

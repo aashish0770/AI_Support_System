@@ -1,0 +1,135 @@
+[
+  {
+    "query": "how do I verify a webhook signature",
+    "relevant_titles": [
+      "Webhooks",
+      "Webhook signature verification always fails"
+    ]
+  },
+  {
+    "query": "what happens if I exceed my rate limit",
+    "relevant_titles": ["Rate Limits"]
+  },
+  {
+    "query": "AUTH_KEY_REVOKED",
+    "relevant_titles": [
+      "Authentication & API Keys",
+      "API key stopped working right after rotation"
+    ]
+  },
+  {
+    "query": "how do I rotate an API key",
+    "relevant_titles": ["Authentication & API Keys"]
+  },
+  { "query": "wf_9f2a1c", "relevant_titles": ["API Reference: Workflows"] },
+  {
+    "query": "how do I create my first workflow",
+    "relevant_titles": ["Getting Started with Cobalt Loop"]
+  },
+  {
+    "query": "what are workflow states",
+    "relevant_titles": ["Getting Started with Cobalt Loop"]
+  },
+  {
+    "query": "how do I connect Slack to my account",
+    "relevant_titles": ["Slack Integration"]
+  },
+  {
+    "query": "channel_not_found error",
+    "relevant_titles": [
+      "Slack Integration",
+      "Slack action failing with channel_not_found"
+    ]
+  },
+  {
+    "query": "how do I connect GitHub",
+    "relevant_titles": ["GitHub Integration"]
+  },
+  {
+    "query": "PR merged trigger fired for a closed PR",
+    "relevant_titles": [
+      "GitHub Integration",
+      "GitHub PR merged trigger fired for a PR that was only closed"
+    ]
+  },
+  {
+    "query": "how long is run history retained",
+    "relevant_titles": ["Data Retention Policy"]
+  },
+  {
+    "query": "what happens if I delete my account",
+    "relevant_titles": ["Data Retention Policy"]
+  },
+  {
+    "query": "how do I set up SSO",
+    "relevant_titles": ["SSO Configuration (Enterprise)"]
+  },
+  {
+    "query": "locked out after enabling SSO",
+    "relevant_titles": [
+      "SSO Configuration (Enterprise)",
+      "Locked out of account after enabling SSO enforcement"
+    ]
+  },
+  {
+    "query": "SAML assertion signature invalid",
+    "relevant_titles": [
+      "SSO Configuration (Enterprise)",
+      "SAML assertion signature invalid during test login"
+    ]
+  },
+  {
+    "query": "what happens when I downgrade my plan",
+    "relevant_titles": ["Billing & Plans", "Question about downgrade timing"]
+  },
+  {
+    "query": "monthly task limit exceeded",
+    "relevant_titles": [
+      "Billing & Plans",
+      "Monthly task limit exceeded — will our workflows stop running?"
+    ]
+  },
+  {
+    "query": "field mapping syntax",
+    "relevant_titles": ["API Reference: Triggers & Actions"]
+  },
+  {
+    "query": "field shows blank output with no error",
+    "relevant_titles": [
+      "API Reference: Triggers & Actions",
+      "Field mapping shows blank output but no error anywhere"
+    ]
+  },
+  {
+    "query": "webhook retry behavior",
+    "relevant_titles": [
+      "Webhooks",
+      "Webhook marked Failed after exactly 4 retries, is that expected?"
+    ]
+  },
+  {
+    "query": "duplicate Slack messages for the same signup",
+    "relevant_titles": ["Duplicate Slack messages for the same signup event"]
+  },
+  {
+    "query": "workflow not firing for existing rows",
+    "relevant_titles": [
+      "Getting Started with Cobalt Loop",
+      "Troubleshooting Common Errors"
+    ]
+  },
+  {
+    "query": "GitHub repository not showing as trigger option",
+    "relevant_titles": [
+      "GitHub Integration",
+      "GitHub trigger not showing repository we granted access to"
+    ]
+  },
+  {
+    "query": "SCIM provisioning",
+    "relevant_titles": [
+      "SSO Configuration (Enterprise)",
+      "Need SCIM and manual member management to coexist temporarily"
+    ]
+  }
+]

@@ -17,7 +17,7 @@ class CitationOut(BaseModel):
 
 
 class ChatResponse(BaseModel):
-    message: str
+    answer: str
     citations: List[CitationOut]
     in_scope: bool = True
     suggested_topics: List[str] = []

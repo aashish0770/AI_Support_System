@@ -11,5 +11,13 @@ _engine = create_engine(get_settings().database_url)
 SessionLocal = sessionmaker(bind=_engine, autoflush=False, autocommit=False)
 
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 def get_session() -> Session:
     return SessionLocal()

@@ -1,0 +1,23 @@
+# backend/app/schemas/chat.py
+from __future__ import annotations
+
+from typing import List
+
+from pydantic import BaseModel, Field
+
+
+class ChatRequest(BaseModel):
+    message: str = Field(min_length=1)
+
+
+class CitationOut(BaseModel):
+    chunk_id: int
+    document_title: str
+    relevance_score: float
+
+
+class ChatResponse(BaseModel):
+    message: str
+    citations: List[CitationOut]
+    in_scope: bool = True
+    suggested_topics: List[str] = []

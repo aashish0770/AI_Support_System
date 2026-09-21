@@ -66,7 +66,7 @@ def _is_out_of_scope(vector_results: List[dict]) -> bool:
     return best_distance > OUT_OF_SCOPE_DISTANCE_THRESHOLD
 
 
-def _get_all_topic_title(db: Session) -> List[str]:
+def _get_all_topic_titles(db: Session) -> List[str]:
     """Only markdown docs, not tickets: ticket titles are issue
     descriptions, not topics names someone would recognize as a thing to as about"""
     rows = db.execute(
@@ -108,7 +108,7 @@ def answer_question(db: Session, query: str, top_k: int = TOP_K) -> RAGAnswer:
             answer=acknowledgement,
             citations=[],
             in_scope=False,
-            suggested_topics=_get_all_topic_title(db),
+            suggested_topics=_get_all_topic_titles(db),
         )
 
     #  its an extra embedding call fine for now but if the latency for /chat

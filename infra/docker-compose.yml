@@ -19,7 +19,8 @@ services:
       start_period: 15s
       retries: 3
     environment:
-      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      POSTGRES_HOST: db
 
   frontend:
     build: ../frontend

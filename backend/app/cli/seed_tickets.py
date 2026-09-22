@@ -27,6 +27,7 @@ def _get_or_create_demo_user(db) -> User:
     # exists only to satisy Ticket.user_id's NOT NULL FK for seeding.
     user = User(
         email=DEMO_USER_EMAIL,
+        # password is intentionally hardcoded, as this a demo user and haven't implemented auth
         hashed_password="not-a-real-login",
         full_name="Demo User",
         role=UserRole.customer,
@@ -65,7 +66,7 @@ def seed_tickets() -> int:
                 Ticket(
                     user_id=demo_user.id,
                     subject=subject,
-                    description=raw.get("decription") or "",
+                    description=raw.get("description") or "",
                     status=status,
                 )
             )

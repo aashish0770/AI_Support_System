@@ -19,7 +19,7 @@ def test_extract_citations_parses_search_docs_tool_message():
             ],
         ),
         ToolMessage(
-            content='{"found": true, "excerpts": [{"chunk_id": 5, "document_title": "Authentication & API Keys", "content": "...", "relevance_score": 0.03}]}',
+            content='{"found": true, "results": [{"chunk_id": 5, "document_title": "Authentication & API Keys", "content": "...", "relevance_score": 0.03}]}',
             name="search_docs",
             tool_call_id="call_1",
         ),

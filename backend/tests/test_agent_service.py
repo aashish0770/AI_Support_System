@@ -2,7 +2,7 @@
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
-from app.services.agent.agent_service import _extract_citations, _extract_tool_names
+from app.services.agent.agent_service import extract_citations, extract_tool_names
 
 
 def test_extract_citations_parses_search_docs_tool_message():
@@ -25,7 +25,7 @@ def test_extract_citations_parses_search_docs_tool_message():
         ),
         AIMessage(content="You can rotate your key from Settings."),
     ]
-    citations = _extract_citations(messages)
+    citations = extract_citations(messages)
     assert len(citations) == 1
     assert citations[0].document_title == "Authentication & API Keys"
 
@@ -38,7 +38,7 @@ def test_extract_citations_ignores_not_found_results():
             tool_call_id="1",
         )
     ]
-    assert _extract_citations(messages) == []
+    assert extract_citations(messages) == []
 
 
 def test_extract_citations_ignores_other_tools():
@@ -49,7 +49,7 @@ def test_extract_citations_ignores_other_tools():
             tool_call_id="1",
         )
     ]
-    assert _extract_citations(messages) == []
+    assert extract_citations(messages) == []
 
 
 def test_extract_tool_names_collects_all_calls_and_skips_final_answer():
@@ -63,4 +63,4 @@ def test_extract_tool_names_collects_all_calls_and_skips_final_answer():
         ),
         AIMessage(content="final answer"),  # no tool_calls — must not appear
     ]
-    assert _extract_tool_names(messages) == ["search_docs", "check_ticket_status"]
+    assert extract_tool_names(messages) == ["search_docs", "check_ticket_status"]

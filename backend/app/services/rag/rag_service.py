@@ -1,5 +1,10 @@
 # backend/app/services/rag/rag_service.py
 
+# Superseded by app.services.agent as of Week 7 — /chat now routes
+# through the agent, not this module directly. Kept for reference;
+# revisit consolidating with tools.py's search_docs if duplication
+# becomes a real issue.
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

@@ -35,9 +35,11 @@ def chat(request: ChatRequest, db: Session = Depends(get_db)) -> ChatResponse:
 # wiring the agent call replace the above code direct RAG call
 
 from fastapi import APIRouter
+from sse_starlette.sse import EventSourceResponse
 
 from app.schemas.chat import ChatRequest, ChatResponse, CitationOut
 from app.services.agent.agent_service import run_agent
+from app.services.agent.agent_stream_service import stream_agent
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
@@ -56,3 +58,12 @@ def chat(request: ChatRequest) -> ChatResponse:
             for c in result.citations
         ],
     )
+
+
+@router.post("/stream")
+async def chat_stream(request: ChatRequest):
+    async def event_generator():
+        async for event in stream_agent(request.message):
+            yield event
+
+    return EventSourceResponse(event_generator())

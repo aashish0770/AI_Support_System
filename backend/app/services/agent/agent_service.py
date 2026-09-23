@@ -1,5 +1,4 @@
 # backend/app/services/agent/agent_service.py
-
 from __future__ import annotations
 
 import json
@@ -27,7 +26,7 @@ class AgentAnswer:
     tool_calls_made: List[str] = field(default_factory=list)
 
 
-def _extract_citations(messages: list) -> List[AgentCitation]:
+def extract_citations(messages: list) -> List[AgentCitation]:
     citations: List[AgentCitation] = []
     for message in messages:
         if not isinstance(message, ToolMessage) or message.name != "search_docs":
@@ -49,7 +48,7 @@ def _extract_citations(messages: list) -> List[AgentCitation]:
     return citations
 
 
-def _extract_tool_names(messages: list) -> List[str]:
+def extract_tool_names(messages: list) -> List[str]:
     names = []
     for message in messages:
         if isinstance(message, AIMessage) and getattr(message, "tool_calls", None):
@@ -64,6 +63,6 @@ def run_agent(user_message: str) -> AgentAnswer:
 
     return AgentAnswer(
         answer=final_message.content,
-        citations=_extract_citations(messages),
-        tool_calls_made=_extract_tool_names(messages),
+        citations=extract_citations(messages),
+        tool_calls_made=extract_tool_names(messages),
     )

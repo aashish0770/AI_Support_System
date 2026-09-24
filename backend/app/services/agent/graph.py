@@ -1,6 +1,8 @@
+# backend/app/services/agent/graph.py
+
 from __future__ import annotations
 
-from functools import lru_cache
+# from functools import lru_cache
 from typing import Annotated, TypedDict
 
 from langchain_core.messages import AnyMessage, SystemMessage
@@ -34,7 +36,7 @@ class AgentState(TypedDict):
     messages: Annotated[list[AnyMessage], add_messages]
 
 
-@lru_cache
+# @lru_cache
 def _get_agent_llm():
     settings = get_settings()
     llm = ChatOllama(
@@ -43,13 +45,13 @@ def _get_agent_llm():
     return llm.bind_tools(AVAILABLE_TOOLS)
 
 
-def _agent_node(state: AgentState) -> dict:
+async def _agent_node(state: AgentState) -> dict:
     # The system prompt is prepended fresh on every call rather than
     # stored in state — this keeps it out of the persisted message
     # history (so it's never duplicated across loop iterations) while
     # still being present for every LLM call.
     messages = [SystemMessage(content=SYSTEM_PROMPT), *state["messages"]]
-    response = _get_agent_llm().invoke(messages)
+    response = await _get_agent_llm().ainvoke(messages)
     return {"messages": [response]}
 
 

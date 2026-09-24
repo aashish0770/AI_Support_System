@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from typing import AsyncGenerator
+from loguru import logger
 
 from langchain_core.messages import HumanMessage
 
@@ -60,8 +61,12 @@ async def stream_agent(user_message: str) -> AsyncGenerator[dict, None]:
                 if isinstance(output, dict) and "messages" in output:
                     all_messages = output["messages"]
 
-    except Exception as exc:
-        yield {"event": "error", "data": str(exc)}
+    except Exception:
+        logger.exception("Agent stream failed.")
+        yield {
+            "event": "error",
+            "data": "An intrenal error occurred while processing your request. Please try again.",
+        }
         return
 
     yield {

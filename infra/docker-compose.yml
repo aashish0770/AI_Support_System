@@ -21,6 +21,7 @@ services:
     environment:
       OLLAMA_BASE_URL: http://host.docker.internal:11434
       POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379
 
   frontend:
     build: ../frontend

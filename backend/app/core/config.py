@@ -28,6 +28,14 @@ class Settings(BaseSettings):
     # LLM provider
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = "llama3.1:8b"
+    
+    # security (user auth)
+    secret_key: str 
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
+    refresh_token_expire_days: int = 7
+    
+    redis_url: str = "redis://localhost:6379"
 
     model_config = SettingsConfigDict(case_sensitive=False, extra="ignore")
 

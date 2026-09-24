@@ -65,7 +65,7 @@ async def stream_agent(user_message: str) -> AsyncGenerator[dict, None]:
         logger.exception("Agent stream failed.")
         yield {
             "event": "error",
-            "data": "An intrenal error occurred while processing your request. Please try again.",
+            "data": "An internal error occurred while processing your request. Please try again.",
         }
         return
 
